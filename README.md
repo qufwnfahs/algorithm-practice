@@ -3,7 +3,7 @@
 > 목차
 
 [1. 백트래킹](#1-%eb%b0%b1%ed%8a%b8%eb%9e%98%ed%82%b9)
-  - [4-Queens-Problem](#%e2%96%a0-4-queens-problem)
+  - [4-Queens-Problem](#-4-queens-problem)
 
 ## 1. 백트래킹
 
