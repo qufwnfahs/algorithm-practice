@@ -1,9 +1,17 @@
 # Algorithm 정리
 
 > 목차
+- [Algorithm 정리](#algorithm-%ec%a0%95%eb%a6%ac)
+- [1. 완전 탐색](#1-%ec%99%84%ec%a0%84-%ed%83%90%ec%83%89)
+	- [1. 백트래킹](#1-%eb%b0%b1%ed%8a%b8%eb%9e%98%ed%82%b9)
+		- [■ 4-Queens-Problem](#%e2%96%a0-4-queens-problem)
+	- [2. 순열](#2-%ec%88%9c%ec%97%b4)
 
-[1. 백트래킹](#1-%eb%b0%b1%ed%8a%b8%eb%9e%98%ed%82%b9)
-  - [4-Queens-Problem](#-4-queens-problem)
+# 1. 완전 탐색
+
+'무식하게 푼다(brute-force)'는 컴퓨터의 빠른 계산 능력을 이용해 가능한 경우의 수를 일일히 나열하면서 답을 찾는 방법을 의미한다.
+
+완전 탐색은 "가능한 모든 방법을 전부 만들어 보는 알고리즘"을 말한다.
 
 ## 1. 백트래킹
 
@@ -109,3 +117,44 @@ DFS는 유망하지 않은 (2,1)과 (2,2)도 검사를 했을 것이다.  그렇
 		}
 	}
  
+ ## 2. 순열
+
+DFS 방법에서 visited 배열을 이용하여 순열을 구할 수 있다. 하위 노드로 이동하면서 중복된 노드를 방문하지 않게 하기 위해 visited 배열을 사용한다. 상위 노드로 돌아올 때 이용한 visited를 원래대로 되돌림으로써 순열 알고리즘이 가능하다.
+
+아래는 자바로 작성한 코드이다.
+
+    public class Permutaion 
+    {
+	    static int arr[] = { 1, 2, 3, 4, 5 };
+	    static int Q[] = new int[arr.length];
+	    
+	    public static void main(String[] args)
+	    {
+			boolean[] visited = new boolean[arr.length];
+			
+			// 길이가 5인 모든 순열을 구한다. arr = {1, 2, 3, 4, 5}
+			doPerm(0, visited);    
+	    }
+		public static doPerm(int row, boolean[] visited)
+		{
+			// row가 5이면 길이가 5인 순열
+			if (row == arr.length)
+			{
+				// End Point
+				System.out.println(Arrays.toString(Q));
+				return;
+			}
+			
+			for (int i = 0; i < arr.length; i++)
+			{
+				if (!visited[i])
+				{
+					Q[row] = arr[i];
+					visited[i] = true;
+					doPerm(row+1, visited);
+					visited[i] = false;  // 상위 노드로 돌아왔을 때 탐색에 이용
+										 // 한 visited 값을 되돌린다.
+				}
+			}
+		}
+	}
